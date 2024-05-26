@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RP Game</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <div id="gui">
+      <div>
+        <h1>Zelf Rijdende Auto</h1>
+
+        <div class="level" id="level-1">
+          <h2>Level 1</h2>
+          <p>
+            In dit level kan je de auto zelf besturen om een gevoel te krijgen van hoe de auto
+            werkt. Klik op reset om de auto terug te zetten naar de startpositie. Het overige
+            verkeer begint met rijden zodra jij gaat rijden.
+          </p>
+          <b> Gebruik de pijltjestoetsen om te sturen. </b>
+          <p>Als je klaar bent om de auto zelf te laten rijden, klik dan op "next".</p>
+        </div>
+        <div class="level" id="level-2">
+          <h2>Level 2</h2>
+          <p>
+            De auto rijdt nu met behulp van een neuraal netwerk. Laten we het netwerk het brein van
+            de auto noemen. Zoals je misschien al ziet rijdt de auto overal tegenaan. Dit komt
+            doordat het brein willikeurig is gegenereerd. Klik op reset om nog een brein te
+            genereren.
+          </p>
+          <b
+            >Als de auto niet beweegt, doet het willikeurige brein niets. Probeer een nieuw brein
+            door op "reset" te klikken.</b
+          >
+          <p>Probeer een paar willikeurige breien en klik dan op "next".</p>
+        </div>
+        <div class="level" id="level-3">
+          <h2>Level 3</h2>
+          <p>
+            Een willikeurig brein heeft een kleine kans om netjes te rijden, maar als we het vaak
+            genoeg proberen vinden we uiteindelijk een brein dat minder vaak tegen dingen aan rijdt.
+            Met de slider rechts kan je de hoeveelheid autos die we tegelijk proberen aanpassen. De
+            hoeveelheid autos die we tegelijk proberen noemen we de populatie.
+          </p>
+          <b>Probeer de populatie aan te passen met het schuifje rechts.</b>
+          <p>Klik op "reset" om nog een keer willikeurige breinen te genereren.</p>
+          <p>Klik op "next" om door te gaan.</p>
+        </div>
+        <div class="level" id="level-4">
+          <h2>Level 4</h2>
+          <p>
+            We kunnen ook experimenteren met de hoeveelheid sensors, onder welke hoek ze staan en de range. De
+            sensors zijn de gele lijnen die uit de auto komen. De sensoren meten de afstand tot een
+            obstakel (de muur en de andere autos). Het brein gebruikt deze informatie om een
+            beslissing te maken over hoe hard en in welke richting de auto moet rijden.
+          </p>
+          <b> Experimenteer met de hoeveelheid, de hoek en de range van de sensors. </b>
+          <p>Klik op "next" om door te gaan.</p>
+        </div>
+        <div class="level" id="level-5">
+          <h2>Level 5</h2>
+          <p>
+            Ook een brein dat minder vaak tegen dingen aan rijdt, rijdt nog steeds niet perfect. We
+            willen de brein dat het beste rijdt houden en de rest weggooien. Van het beste brein
+            maken we 100 kopieën die allemaal net een beetje anders zijn. Elke keer dat we dit doen
+            noemen we het een generatie. Het aanpassen van het beste brein noemen we mutatie.
+          </p>
+          <b> Klik op "save" om het beste brein te bewaren. </b>
+          <p>
+            Als je op "save" klikt wordt het brein bewaard dat op dat moment het verste is. Dat
+            brein wordt dan gebruikt om de generatie te genereren. Klik op "reset" om een nieuwe
+            generatie te starten.
+          </p>
+          <p>
+            Als je perongeluk een sleche generatie hebt bewaard, klik dan op "delete" om het weer
+            met compleet willikeurige breinen te proberen.
+          </p>
+        </div>
+        <div class="level" id="level-6">
+          <h2>Level 6</h2>
+          <p>
+            Als je brein nog heel slecht rijdt willen we we tussen generaties veel veranderingen maken.
+            Als je brein al goed rijdt willen we juist nog maar kleine veranderingen maken om
+            net de puntjes op de i te zetten.
+          </p>
+          <p>
+            De hooeveelheid dat we een brein veranderen noemen we de mutatie. De mutatie geeft
+            aan hoeveel procent van de het brein veranderd wordt. Als de mutatie 100% is, is het
+            brein compleet willikeurig. Als de mutatie 0% is, is het een exacte kopie van het
+            beste brein.
+          </p>
+          <b> Experimenteer met de mutatie rate. </b>
+          <p>Klik op "next" om door te gaan.</p>
+        </div>
+        <span class="button-holder">
+          <button id="save"><b>Save</b></button>
+          <button id="delete"><b>Delete</b></button>
+          <button id="reset"><b>Reset</b></button>
+        </span>
+      </div>
+      <div class="settings" id="settings">
+        <h2>Parameters</h2>
+        <div id="setting-population">
+          <label for="population">Populatie</label>
+          <input type="range" id="population" min="1" max="100" value="1" />
+          <span id="population-display">1</span>
+        </div>
+        <div id="setting-sensor-amount">
+          <label for="sensor-amount">Aantal sensors</label>
+          <input type="range" id="sensor-amount" min="1" max="25" value="5" />
+          <span id="sensor-amount-display">5</span>
+        </div>
+        <div id="setting-sensor-angle">
+          <label for="sensor-angle">Sensor hoek</label>
+          <input type="range" id="sensor-angle" min="0" max="180" value="90" />
+          <span id="sensor-angle-display">90°</span>
+        </div>
+        <div id="setting-sensor-range">
+          <label for="sensor-range">Sensor range</label>
+          <input type="range" id="sensor-range" min="50" max="500" value="200" />
+          <span id="sensor-range-display">200</span>
+        </div>
+        <div id="setting-mutation-rate">
+          <label for="mutation-rate">Mutatie</label>
+          <input type="range" id="mutation-rate" min="0" max="100" value="30" />
+          <span id="mutation-rate-display">30%</span>
+      </div>
+    </div>
+    <button id="next"><b>Next</b></button>
+    <script src="road.js"></script>
+    <script src="network.js"></script>
+    <script src="sensor.js"></script>
+    <script src="controls.js"></script>
+    <script src="car.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
