@@ -18,6 +18,8 @@ class Car {
     rayCount = 5,
     raySpread = Math.PI / 2,
     rayRange = 200,
+    hiddenLayers = 1,
+    neuronCount = 4,
     width = 35,
     height = 50
   ) {
@@ -46,15 +48,10 @@ class Car {
     this.ACCELERATION = 0.02
     this.rayCount = rayCount
 
-    console.log(rayCount, this.rayCount)
+    const hiddenLayer = Array(hiddenLayers).fill(neuronCount)
 
     this.sensors = isDummy || !isAi ? null : new Sensor(this, this.rayCount, rayRange, raySpread)
-    this.network = !isAi ? null : new Network([this.rayCount, 8, 4])
-
-    console.log(rayCount, this.rayCount)
-
-    console.log(this.sensors)
-    console.log(this.network)
+    this.network = !isAi ? null : new Network([this.rayCount, ...hiddenLayer, 4])
 
     this.updateBorders()
   }
@@ -216,7 +213,7 @@ class Car {
       context.fillStyle = "blue"
     }
     if (this.damaged) {
-      context.fillStyle = "red"
+      context.fillStyle = "#cc0000"
     }
     context.fillRect(-this.width / 2, -this.height / 2, this.width, this.height)
     context.restore()

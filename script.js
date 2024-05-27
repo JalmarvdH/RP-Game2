@@ -1,8 +1,11 @@
 const canvas = document.getElementById("canvas")
 canvas.height = window.innerHeight
 canvas.width = 200
+const networkCanvas = document.getElementById("network")
+networkCanvas.height = 300
 
 const context = canvas.getContext("2d")
+const networkContext = networkCanvas.getContext("2d")
 
 let currentLevel = 1
 
@@ -13,6 +16,8 @@ let sensorAngle = Math.PI / 2
 let useBest = false
 let mutationRate = 0.3
 let sensorRange = 200
+let hiddenLayerCount = 1
+let neuronCount = 5
 
 // SETTING HANDLERS
 const handlePopulationChange = (e) => {
@@ -34,8 +39,18 @@ const handleMutationRateChange = (e) => {
   mutationRateDisplay.innerText = e.target.value + "%"
 }
 const handleSensorRangeChange = (e) => {
-  sensorRange = e.target.value
+  sensorRange = parseInt(e.target.value)
   sensorRangeDisplay.innerText = sensorRange
+}
+const handleLayerCountChange = (e) => {
+  deleteBestCar()
+  hiddenLayerCount = parseInt(e.target.value)
+  layerCountDisplay.innerText = hiddenLayerCount
+}
+const handleNeuronCountChange = (e) => {
+  deleteBestCar()
+  neuronCount = parseInt(e.target.value)
+  neuronCountDisplay.innerText = neuronCount
 }
 
 // HTML ELEMENTS
@@ -43,6 +58,7 @@ const levelDivs = Array.from(document.getElementsByClassName("level"))
 const saveButton = document.getElementById("save")
 const deleteButton = document.getElementById("delete")
 const settings = document.getElementById("settings")
+const networkDisplay = document.getElementById("network-display")
 
 const sensorAmountSettings = document.getElementById("setting-sensor-amount")
 const sensorAmountInput = document.getElementById("sensor-amount")
@@ -63,6 +79,14 @@ const sensorRangeSettings = document.getElementById("setting-sensor-range")
 const sensorRangeInput = document.getElementById("sensor-range")
 const sensorRangeDisplay = document.getElementById("sensor-range-display")
 
+const layerCountSettings = document.getElementById("setting-layers")
+const layerCountInput = document.getElementById("layers")
+const layerCountDisplay = document.getElementById("layers-display")
+
+const neuronCountSettings = document.getElementById("setting-neurons")
+const neuronCountInput = document.getElementById("neurons")
+const neuronCountDisplay = document.getElementById("neurons-display")
+
 // HIDE EVERYTHING EXCEPT THE FIRST LEVEL
 sensorAmountDisplay.innerText = sensorAmount
 sensorAmountInput.value = sensorAmount
@@ -73,6 +97,9 @@ sensorAmountSettings.style.display = "none"
 sensorAngleSettings.style.display = "none"
 mutationRateSettings.style.display = "none"
 sensorRangeSettings.style.display = "none"
+networkDisplay.style.display = "none"
+layerCountSettings.style.display = "none"
+neuronCountSettings.style.display = "none"
 
 const hideNonCurrentLevels = () => {
   for (const levelDiv of levelDivs) {
@@ -116,7 +143,19 @@ const level = () => {
   cars = []
 
   for (let i = 0; i < population; i++) {
-    cars.push(new Car(100, 100, false, true, sensorAmount, sensorAngle, sensorRange))
+    cars.push(
+      new Car(
+        100,
+        100,
+        false,
+        true,
+        sensorAmount,
+        sensorAngle,
+        sensorRange,
+        hiddenLayerCount,
+        neuronCount
+      )
+    )
   }
 
   if (useBest) {
@@ -168,6 +207,11 @@ const next = () => {
     case 6:
       mutationRateSettings.style.display = "flex"
       break
+    case 7:
+      networkDisplay.style.display = "flex"
+      neuronCountSettings.style.display = "flex"
+      layerCountSettings.style.display = "flex"
+      break
     default:
       break
   }
@@ -195,6 +239,8 @@ sensorAmountInput.addEventListener("input", handleSensorAmountChange)
 sensorAngleInput.addEventListener("input", handleSensorAngleChange)
 mutationRateInput.addEventListener("input", handleMutationRateChange)
 sensorRangeInput.addEventListener("input", handleSensorRangeChange)
+layerCountInput.addEventListener("input", handleLayerCountChange)
+neuronCountInput.addEventListener("input", handleNeuronCountChange)
 
 animate()
 
@@ -235,5 +281,13 @@ function animate() {
   // car.draw(context)
 
   context.restore()
+
+  networkContext.clearRect(0, 0, networkCanvas.width, networkCanvas.height)
+  if (playing) {
+    VisualizeNetwork(
+      networkContext,
+      [...cars[farthestcar].network.levels.map((l) => l.inputs.length), 4].reverse()
+    )
+  }
   requestAnimationFrame(animate)
 }

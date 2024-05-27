@@ -13,6 +13,11 @@
         <div class="level" id="level-1">
           <h2>Level 1</h2>
           <p>
+            Welkom bij deze interactieve les over kunstmatige intelligentie. In deze les leer je
+            de basis van neurale netwerken en hoe we die kunnen inzetten om een auto zelf te laten
+            rijden.
+          </p>
+          <p>
             In dit level kan je de auto zelf besturen om een gevoel te krijgen van hoe de auto
             werkt. Klik op reset om de auto terug te zetten naar de startpositie. Het overige
             verkeer begint met rijden zodra jij gaat rijden.
@@ -92,19 +97,83 @@
           <b> Experimenteer met de mutatie rate. </b>
           <p>Klik op "next" om door te gaan.</p>
         </div>
+        <div class="level" id="level-7">
+          <h2>Level 7</h2>
+          <p>
+            Laten we iets dieper in het brein duiken. Het brein is een netwerk van van neuronen. Elke
+            neuron kan aan of uit staan. Als een neuron aan staat, stuurt hij een signaal naar de neuronen
+            in de volgende laag. Als een neuron uit staat, stuurt hij geen signaal. 
+          </p>
+          <p>
+            Het netwerk rechts heeft een aantal lagen. De bovenste laag noemen we de output laag en bestaat uit 4 neuronen.
+            Elke neuron in de output laag staat voor een van de acties die de auto kan doen. Dat zijn de 4 pijltjes
+            van het toetsenbord. Als een neuron in de output laag aan staat, activeert het netwerk de bijbehorende actie.
+          </p>
+          <p>
+            De onderste laag noemen we de input laag en is net zo groot als het aantal sensors. Elke neuron in de input laag
+            heeft een van de sensors als input. Hoe dichter een sensor bij een obstakel is, hoe meer signaal de neuron krijgt.
+          </p>
+          <p>
+            De lagen tussen de input en output laag noemen we de verborgen lagen. Deze lagen zijn nodig om de informatie van de
+            sensors te vertalen naar de acties van de auto. Hoe meer verborgen lagen, hoe complexer het netwerk.
+          </p>
+          <p>
+            Elke lijntje tussen een paar neuronen heeft een gewicht. Hoe hoger het gewicht, hoe meer signaal er doorgegeven wordt.
+            Als we een willerkeurig brein genereren, genereren we eigenlijk een willikeurige set van gewichten.
+          </p>
+          <b>
+            Experimenteer met de hoeveelheid lagen en de hoeveelheid neuronen per laag. De hoeveelheid sensoren bepaalt de grootte
+            van de input laag. De output laag heeft altijd 4 neuronen.
+          </b>
+          <p>
+            Let op: hoe complexer het netwerk, hoe lager de kans dat een willikeurig brein goed rijdt.
+          </p>
+          <p>
+            Let op: als je de hoeveelheid lagen of de hoeveelheid neuronen per laag veranderd, kan je niet meer het beste brein
+            gebruiken dat je eerder bewaard hebt. Dat is omdat het netwerk van het beste brein niet dezelfde structuur heeft.
+          </p>
+        </div>
+        <div class="level" id="level-8">
+          <h2>Level 8</h2>
+          <p>
+            Gefeliciteerd! Je hebt nu alle tools om een zelf rijdende auto te maken. Experimenteer met de parameters en probeer
+            een auto te maken die zo ver mogelijk komt.
+          </p>
+          <b>
+            Nog een paar tips:
+          </b>
+          <ul>
+            <li>
+              Hoe complexer het netwerk, hoe langer het duurt om een generatie te trainen.
+            </li>
+            <li>
+              Hoe beter je auto rijdt, hoe lager de mutatie.
+            </li>
+            <li>
+              Als je vastloopt, overweeg de het beste brein te verwijderen en een nieuwe generatie te starten.
+            </li>
+          </ul>
+        </div>
         <span class="button-holder">
           <button id="save"><b>Save</b></button>
           <button id="delete"><b>Delete</b></button>
           <button id="reset"><b>Reset</b></button>
         </span>
       </div>
-      <div class="settings" id="settings">
-        <h2>Parameters</h2>
-        <div id="setting-population">
-          <label for="population">Populatie</label>
-          <input type="range" id="population" min="1" max="100" value="1" />
-          <span id="population-display">1</span>
+      <div class="flex-gap">
+        <div class="settings" id="settings">
+          <h2>Parameters</h2>
+          <div id="setting-population">
+            <label for="population">Populatie</label>
+            <input type="range" id="population" min="1" max="100" value="1" />
+            <span id="population-display">1</span>
         </div>
+        <div id="setting-mutation-rate">
+          <label for="mutation-rate">Mutatie</label>
+          <input type="range" id="mutation-rate" min="0" max="100" value="30" />
+          <span id="mutation-rate-display">30%</span>
+        </div>
+        <br/>
         <div id="setting-sensor-amount">
           <label for="sensor-amount">Aantal sensors</label>
           <input type="range" id="sensor-amount" min="1" max="25" value="5" />
@@ -120,13 +189,25 @@
           <input type="range" id="sensor-range" min="50" max="500" value="200" />
           <span id="sensor-range-display">200</span>
         </div>
-        <div id="setting-mutation-rate">
-          <label for="mutation-rate">Mutatie</label>
-          <input type="range" id="mutation-rate" min="0" max="100" value="30" />
-          <span id="mutation-rate-display">30%</span>
+        <br/>
+        <div id="setting-layers">
+          <label for="layers">Verborgen lagen</label>
+          <input type="range" id="layers" min="1" max="5" value="1" />
+          <span id="layers-display">1</span>
+        </div>
+        <div id="setting-neurons">
+          <label for="neurons">Neuronen per laag</label>
+          <input type="range" id="neurons" min="1" max="10" value="5" />
+          <span id="neurons-display">5</span>
+        </div>
+      </div>
+      <div class="settings" id="network-display">
+        <h2>Netwerk</h2>
+        <canvas id="network"></canvas>
       </div>
     </div>
     <button id="next"><b>Next</b></button>
+    <script src="visualizer.js"></script>
     <script src="road.js"></script>
     <script src="network.js"></script>
     <script src="sensor.js"></script>
