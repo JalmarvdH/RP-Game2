@@ -212,6 +212,8 @@ const next = () => {
       neuronCountSettings.style.display = "flex"
       layerCountSettings.style.display = "flex"
       break
+    case 8:
+      document.getElementById("next").style.display = "none"
     default:
       break
   }
