@@ -58,7 +58,7 @@ class Car {
 
   update(borders) {
     if (this.isAi) this.sensors.update(borders)
-    if (this.isAi) {
+    if (this.isAi && !this.damaged) {
       let input = this.sensors.readings.map((r) => {
         const dist = distance(r, { x: this.x, y: this.y })
         return dist / this.sensors.range
