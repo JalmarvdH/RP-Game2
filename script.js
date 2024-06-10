@@ -210,9 +210,11 @@ const next = () => {
     case 7:
       networkDisplay.style.display = "flex"
       neuronCountSettings.style.display = "flex"
-      layerCountSettings.style.display = "flex"
       break
     case 8:
+      layerCountSettings.style.display = "flex"
+      break
+    case 9:
       document.getElementById("next").style.display = "none"
     default:
       break
