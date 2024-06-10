@@ -57,6 +57,8 @@ const handleNeuronCountChange = (e) => {
 const levelDivs = Array.from(document.getElementsByClassName("level"))
 const saveButton = document.getElementById("save")
 const deleteButton = document.getElementById("delete")
+const qbeforeButton = document.getElementById("qbefore")
+const qafterButton = document.getElementById("qafter")
 const settings = document.getElementById("settings")
 const networkDisplay = document.getElementById("network-display")
 
@@ -100,6 +102,7 @@ sensorRangeSettings.style.display = "none"
 networkDisplay.style.display = "none"
 layerCountSettings.style.display = "none"
 neuronCountSettings.style.display = "none"
+qafterButton.style.display = "none"
 
 const hideNonCurrentLevels = () => {
   for (const levelDiv of levelDivs) {
@@ -189,6 +192,7 @@ const next = () => {
   hideNonCurrentLevels()
   switch (currentLevel) {
     case 2:
+      qbeforeButton.style.display = "none"
       playing = true
       break
     case 3:
@@ -215,6 +219,7 @@ const next = () => {
       layerCountSettings.style.display = "flex"
       break
     case 9:
+      qafterButton.style.display = "unset"
       document.getElementById("next").style.display = "none"
     default:
       break
@@ -231,11 +236,23 @@ const reset = () => {
   level()
 }
 
+const qbefore = () => {
+  // open new tab on: https://forms.office.com/e/XhP24Nc7VA
+  window.open("https://forms.office.com/e/XhP24Nc7VA")
+}
+
+const qafter = () => {
+  // open new tab on: https://forms.office.com/e/H89pTMarRU
+  window.open("https://forms.office.com/e/H89pTMarRU")
+}
+
 reset()
 
 // EVENT LISTENERS
 document.getElementById("next").addEventListener("click", next)
 document.getElementById("reset").addEventListener("click", reset)
+qbeforeButton.addEventListener("click", qbefore)
+qafterButton.addEventListener("click", qafter)
 saveButton.addEventListener("click", saveBestCar)
 deleteButton.addEventListener("click", deleteBestCar)
 populationInput.addEventListener("input", handlePopulationChange)

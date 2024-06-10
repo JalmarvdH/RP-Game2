@@ -33,9 +33,19 @@ button {
   box-shadow: 0 6px var(--dark-yellow);
 }
 
+.qbutton {
+  background-color: blue;
+  box-shadow: 0 6px darkblue;
+  color: white;
+}
+
 button:active {
   box-shadow: 0 3px var(--dark-yellow);
   transform: translateY(3px);
+}
+
+.qbutton:active {
+  box-shadow: 0 3px darkblue;
 }
 
 #canvas {
