@@ -177,13 +177,15 @@ const level = () => {
 const road = new Road(100, 180, 3)
 
 const generateRandomTraffic = () => {
-  const amount = Math.floor(Math.random() * 3) + 1
+  const amount = Math.floor(Math.random() * 4) + 1
   const lane = Math.floor(Math.random() * 3) + 1
   const x = road.getLaneCenter(lane)
 
-  traffic.push(new Car(x, cars[farthestcar].y - 1000, true))
+  const newY = traffic[traffic.length - 1].y - 300
+
+  traffic.push(new Car(x, newY, true))
   if (amount === 2) {
-    traffic.push(new Car(road.getLaneCenter((lane % 3) + 1), cars[farthestcar].y - 1000, true))
+    traffic.push(new Car(road.getLaneCenter((lane % 3) + 1), newY, true))
   }
 }
 
